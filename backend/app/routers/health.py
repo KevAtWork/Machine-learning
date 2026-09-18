@@ -2,6 +2,7 @@ import os
 import time
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from backend.app.database import get_db
 from backend.app.config import settings
 
@@ -13,7 +14,7 @@ def health_check(db: Session = Depends(get_db)):
     db_status = "unhealthy"
     try:
         # Run simple select query
-        db.execute("SELECT 1")
+        db.execute(text("SELECT 1"))
         db_status = "healthy"
     except Exception as e:
         db_status = f"unhealthy (error: {e})"
