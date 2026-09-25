@@ -38,15 +38,9 @@ export const DashboardPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [history, setHistory] = useState<HistoryRecord[]>([]);
   const [exporting, setExporting] = useState(false);
-  const token = localStorage.getItem("cardio_token");
-
   useEffect(() => {
-    if (token) {
-      fetchHistory();
-    } else {
-      setLoading(false);
-    }
-  }, [token]);
+    fetchHistory();
+  }, []);
 
   const fetchHistory = async () => {
     setLoading(true);
@@ -138,41 +132,6 @@ export const DashboardPage: React.FC = () => {
       <Navbar />
 
       <main className="container py-12 md:py-16">
-        {/* Unauthenticated View */}
-        {!token ? (
-          <div className="min-h-[60vh] flex items-center justify-center">
-            <div className="glass-card p-10 rounded-2xl max-w-lg w-full text-center space-y-6">
-              <div className="w-14 h-14 rounded-full bg-cyan/15 border border-cyan/30 flex items-center justify-center mx-auto text-cyan">
-                <LockKeyhole size={24} />
-              </div>
-              <div className="space-y-2">
-                <span className="eyebrow justify-center">CLINICAL AUTHENTICATION REQUIRED</span>
-                <h2 className="text-3xl font-bold tracking-tight text-ink font-serif">
-                  Access Patient Dossiers
-                </h2>
-                <p className="text-muted text-xs leading-relaxed max-w-sm mx-auto">
-                  Sign in or create a clinician account to automatically store patient assessments, analyze chronological risk progression, and export CSV logs.
-                </p>
-              </div>
-
-              <div className="flex gap-3 justify-center pt-2">
-                <Link to="/login" className="button button-primary !text-xs px-6">
-                  Clinician Sign In <ArrowRight size={13} />
-                </Link>
-                <Link to="/register" className="button button-outline !text-xs px-5">
-                  Create Account
-                </Link>
-              </div>
-
-              <div className="pt-4 border-t border-line text-[11px] text-dim">
-                <span>Want to test the predictive core immediately without an account? </span>
-                <Link to="/prediction" className="text-cyan font-semibold hover:underline">
-                  Launch Guest Diagnostic
-                </Link>
-              </div>
-            </div>
-          </div>
-        ) : (
           <div className="space-y-10">
             {/* Page Header with Actions */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-line">
@@ -419,7 +378,6 @@ export const DashboardPage: React.FC = () => {
               )}
             </div>
           </div>
-        )}
       </main>
 
       <Footer />
