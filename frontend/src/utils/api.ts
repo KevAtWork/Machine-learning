@@ -23,18 +23,10 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle authorization expirations globally
+// Response interceptor to handle API errors globally
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // Clear token and reload if unauthorized
-      localStorage.removeItem("cardio_token");
-      localStorage.removeItem("cardio_user");
-      if (window.location.pathname !== "/login" && window.location.pathname !== "/register" && window.location.pathname !== "/") {
-        window.location.href = "/login?expired=true";
-      }
-    }
     return Promise.reject(error);
   }
 );

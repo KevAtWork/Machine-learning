@@ -8,7 +8,7 @@ import { PredictionPage } from "./pages/PredictionPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { AnalyticsPage } from "./pages/AnalyticsPage";
 import { DocumentationPage } from "./pages/DocumentationPage";
-import { LoginPage, RegisterPage } from "./pages/AuthPages";
+import { CreditsPage } from "./pages/CreditsPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 const App: React.FC = () => {
@@ -45,9 +45,8 @@ const App: React.FC = () => {
         {/* Documentation & Developer API */}
         <Route path="/documentation" element={<DocumentationPage />} />
 
-        {/* Authentication */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        {/* Credits */}
+        <Route path="/credits" element={<CreditsPage />} />
 
         {/* 404 Fallback */}
         <Route path="*" element={<NotFoundPage />} />

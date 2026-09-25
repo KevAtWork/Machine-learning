@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { HeartPulse, ArrowRight, Menu, X, LogOut, Stethoscope } from "lucide-react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { HeartPulse, ArrowRight, Menu, X } from "lucide-react";
 
 export function Logo() {
   return (
@@ -17,30 +17,7 @@ export function Logo() {
 
 export const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [user, setUser] = useState<{ full_name?: string; email?: string } | null>(null);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("cardio_user");
-    if (storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (_e) {
-        localStorage.removeItem("cardio_user");
-        setUser(null);
-      }
-    } else {
-      setUser(null);
-    }
-  }, [location.pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("cardio_token");
-    localStorage.removeItem("cardio_user");
-    setUser(null);
-    navigate("/");
-  };
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -86,63 +63,28 @@ export const Navbar: React.FC = () => {
         >
           Documentation
         </Link>
+        <Link 
+          to="/credits" 
+          onClick={closeMenu}
+          className={isActive("/credits") ? "active" : ""}
+        >
+          Credits
+        </Link>
 
         {/* Mobile menu additional actions */}
         <div className="nav-mobile-cta">
-          {user ? (
-            <div className="flex items-center justify-between w-full">
-              <span className="text-xs font-semibold text-ink">
-                Dr. {user.full_name || "Clinician"}
-              </span>
-              <button 
-                onClick={() => { handleLogout(); closeMenu(); }}
-                className="text-xs text-coral font-bold flex items-center gap-1 cursor-pointer"
-              >
-                Sign Out <LogOut size={13} />
-              </button>
-            </div>
-          ) : (
-            <div className="flex items-center justify-between w-full">
-              <Link to="/login" onClick={closeMenu} className="text-xs font-semibold text-ink">
-                Sign In
-              </Link>
-              <Link to="/prediction" onClick={closeMenu} className="text-xs text-coral font-bold flex items-center gap-1">
-                Start Diagnostic <ArrowRight size={13} />
-              </Link>
-            </div>
-          )}
+          <Link to="/prediction" onClick={closeMenu} className="text-xs text-coral font-bold flex items-center gap-1">
+            Start Diagnostic <ArrowRight size={13} />
+          </Link>
         </div>
       </nav>
 
-      {/* Desktop Right CTA / User State */}
+      {/* Desktop Right CTA */}
       <div className="hidden md:flex items-center gap-3">
-        {user ? (
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-line bg-card/60 text-xs">
-              <Stethoscope size={13} className="text-cyan" />
-              <span className="font-semibold text-[11px] truncate max-w-[120px]">
-                {user.full_name || user.email}
-              </span>
-            </div>
-            <button
-              onClick={handleLogout}
-              title="Sign Out"
-              className="p-2 border border-line rounded-md text-muted-foreground hover:text-ink hover:border-cyan transition-colors cursor-pointer"
-            >
-              <LogOut size={14} />
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <Link to="/login" className="nav-cta text-[11px]">
-              Clinician Sign In
-            </Link>
-            <Link to="/prediction" className="button button-primary !min-h-[38px] !text-[11px] !px-3.5">
-              <span>Start Diagnostic</span>
-              <ArrowRight size={13} />
-            </Link>
-          </div>
-        )}
+        <Link to="/prediction" className="button button-primary !min-h-[38px] !text-[11px] !px-3.5">
+          <span>Start Diagnostic</span>
+          <ArrowRight size={13} />
+        </Link>
       </div>
 
       {/* Mobile Hamburger Toggle */}

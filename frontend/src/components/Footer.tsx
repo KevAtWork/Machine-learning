@@ -13,6 +13,9 @@ export const Footer: React.FC = () => {
       <div className="footer-right">
         <span>© 2026 Cardia AI • Clinical Diagnostic Intelligence</span>
         <div className="flex items-center gap-4">
+          <Link to="/credits" className="hover:text-cyan transition-colors">
+            Credits
+          </Link>
           <Link to="/documentation" className="hover:text-cyan transition-colors">
             Docs & APIs
           </Link>
