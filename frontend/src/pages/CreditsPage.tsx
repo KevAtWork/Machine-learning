@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  Github,
-  Linkedin,
+  GitBranch,
+  Link2,
   Mail,
   ExternalLink,
   HeartPulse,
@@ -242,7 +242,7 @@ export const CreditsPage: React.FC = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-[10px] font-semibold text-muted hover:text-cyan transition-colors"
                   >
-                    <Github size={13} /> GitHub
+                    <GitBranch size={13} /> GitHub
                   </a>
                   <a
                     href={LINKS.linkedin}
@@ -250,7 +250,7 @@ export const CreditsPage: React.FC = () => {
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-[10px] font-semibold text-muted hover:text-cyan transition-colors"
                   >
-                    <Linkedin size={13} /> LinkedIn
+                    <Link2 size={13} /> LinkedIn
                   </a>
                   {LINKS.portfolio && (
                     <a
@@ -455,7 +455,7 @@ export const CreditsPage: React.FC = () => {
               className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-line text-xs font-semibold text-ink hover:border-cyan hover:text-cyan transition-colors"
               style={{ background: "rgba(244,239,228,0.6)" }}
             >
-              <Github size={14} />
+              <GitBranch size={14} />
               GitHub
             </a>
             <a
@@ -465,7 +465,7 @@ export const CreditsPage: React.FC = () => {
               className="flex items-center gap-2 px-4 py-2.5 rounded-md border border-line text-xs font-semibold text-ink hover:border-cyan hover:text-cyan transition-colors"
               style={{ background: "rgba(244,239,228,0.6)" }}
             >
-              <Linkedin size={14} />
+              <Link2 size={14} />
               LinkedIn
             </a>
             {LINKS.portfolio && (
